@@ -13,7 +13,7 @@ const io = new Server(server, {
     credentials: true,
   },
 });
-
+ 
 // if you have rest api then you have to use app.use(cors()) other wise no need
 app.use(
   cors({
@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
   console.log("user connected", socket.id);
   socket.on("message-from-client", (message) => {
     console.log(message);
-    socket.broadcast.emit("message-from-server", message);
+    io.emit("message-from-server", message);
   });
   socket.on("disconnect", (reason) => {
     console.log("Disconnected from server:", reason);
